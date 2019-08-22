@@ -1,25 +1,33 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useContext, useEffect } from "react";
 import WeatherItem from "./WeatherItem";
+import WeatherContext from "../../context/weatherContext";
 
-const Weather = ({ info }) => {
+const Weather = () => {
+  const weatherContext = useContext(WeatherContext);
+  const { getInfo, info, searchByName } = weatherContext;
+  const [isFiltering, setIsFiltering] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    getInfo();
+  }, [getInfo]);
+
   const onChange = e => {
     setSearchTerm(e.target.value);
-
-    console.log(searchTerm);
+    searchTerm.length > 0 ? setIsFiltering(true) : setIsFiltering(false);
+    isFiltering && searchByName(searchTerm);
   };
 
   return (
     <Fragment>
-      <form>
-        <input
-          type="text"
-          className="text-center"
-          placeholder="Search by city..."
-          onChange={onChange}
-          value={searchTerm}
-        />
-      </form>
+      <input
+        type="text"
+        className="text-center"
+        placeholder="Search by city..."
+        onChange={onChange}
+        value={searchTerm}
+      />
+
       {info.length > 0 &&
         info.map((inf, i) => (
           <div key={i}>

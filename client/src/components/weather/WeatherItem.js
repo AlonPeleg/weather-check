@@ -8,7 +8,7 @@ const WeatherItem = ({ inf }) => {
         <span className="card-title">{cityName}</span>
         <p>Temp: {allInfo[0]}</p>
         <p>
-          <i class={allInfo[2] === "Haze." ? "fas fa-smog" : "fas fa-sun"} />{" "}
+          <i className={allInfo[2] === "Haze." ? "fas fa-smog" : "fas fa-sun"} />{" "}
           {allInfo[2]}
         </p>
         {allInfo[0] !== allInfo[1] && <p>Feels Like: {allInfo[1]}</p>}
