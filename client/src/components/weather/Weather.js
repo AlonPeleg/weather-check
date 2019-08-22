@@ -7,7 +7,7 @@ const Weather = () => {
     setTimeout(async () => {
       const res = await axios.get("/getInfo");
       setInfo(res.data);
-    }, 5000);
+    }, 2000);
   }, []);
   return (
     <Fragment>
